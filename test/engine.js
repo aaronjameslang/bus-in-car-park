@@ -29,6 +29,24 @@ describe('engine', function() {
       const pose = move(init)
       expect(pose).to.eql(Pose(1, 2, WEST))
     })
+    it('§1.3 Any movement that would result in the bus leaving the carpark must be prevented,', function() {
+      const pose = R.pipe(
+        place(0, 4, NORTH),
+        move, // illegal
+        report
+      )()
+      expect(pose).to.have.properties(Pose(0, 4, NORTH))
+    })
+    it('§1.3 ... however further valid movement commands must still be allowed', function() {
+      const pose = R.pipe(
+        place(0, 4, NORTH),
+        move, // illegal
+        right,
+        move,
+        report
+      )()
+      expect(pose).to.have.properties(Pose(1, 4, EAST))
+    })
   })
   describe('right', function() {
     it('should go NORTH -> EAST', function() {
@@ -52,26 +70,6 @@ describe('engine', function() {
       const east = Pose(0, 0, EAST)
       const north = left(east)
       expect(north).to.have.properties({x:0, y:0, f:NORTH})
-    })
-  })
-  describe('Specification §1', function() {
-    it('§1.3 Any movement that would result in the bus leaving the carpark must be prevented,', function() {
-      const pose = R.pipe(
-        place(0, 4, NORTH),
-        move, // illegal
-        report
-      )()
-      expect(pose).to.have.properties(Pose(0, 4, NORTH))
-    })
-    it('§1.3 ... however further valid movement commands must still be allowed', function() {
-      const pose = R.pipe(
-        place(0, 4, NORTH),
-        move, // illegal
-        right,
-        move,
-        report
-      )()
-      expect(pose).to.have.properties(Pose(1, 4, EAST))
     })
   })
   describe('Specification §3', function() {
