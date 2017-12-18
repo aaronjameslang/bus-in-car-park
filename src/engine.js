@@ -21,16 +21,11 @@ const turn = R.curry(
     )
 )
 
-const place = R.curry(Pose)
-const left  = turn(-1)
-const right = turn(+1)
-const report = R.identity
-
 module.exports = {
-  place: place,
+  place: R.curry(Pose),
   move: move,
-  left: left,
-  right: right,
-  report:report,
+  left:  turn(-1),
+  right: turn(+1),
+  report: R.identity,
 }
 
