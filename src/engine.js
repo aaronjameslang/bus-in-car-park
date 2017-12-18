@@ -3,7 +3,7 @@ const R = require('rambda')
 const Pose = require('./Pose')
 
 function move(pose) {
-  return Pose(
+  return pose && Pose(
     pose.x + ( 2 - pose.f ) % 2,
     pose.y + ( 1 - pose.f ) % 2,
     pose.f,
@@ -13,7 +13,7 @@ function move(pose) {
 
 const turn = R.curry(
   (Δt, pose) =>
-    Pose(
+    pose && Pose(
       pose.x,
       pose.y,
      (pose.f + Δt + 4) % 4,

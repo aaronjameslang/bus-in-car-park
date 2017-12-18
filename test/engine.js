@@ -139,5 +139,20 @@ describe('engine', function() {
       )()
       expect(pose).to.eql(Pose(1, 1, SOUTH))
     })
+    it('should discard all commands until a valid PLACE command (§1.4)', function() {
+      const pose = R.pipe(
+        place(1, 2, -1),
+        move,
+        left,
+        right,
+        report,
+        place(1, 2, EAST),
+        move,
+        left,
+        right,
+        report
+      )()
+      expect(pose).to.eql(Pose(2, 2, EAST))
+    })
   })
 })
