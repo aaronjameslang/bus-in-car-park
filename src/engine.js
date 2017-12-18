@@ -16,7 +16,7 @@ function move(pose) {
   const x = pose.x + unitVector.x
   const y = pose.y + unitVector.y
   const f = pose.f
-  return Pose(x, y, f)
+  return Pose(x, y, f, pose)
 }
 
 const turn = R.curry(
