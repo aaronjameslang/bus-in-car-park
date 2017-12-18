@@ -31,9 +31,24 @@ describe('engine', function() {
       )()
       expect(pose).to.have.properties(Pose(2, 4, SOUTH))
     })
+    it('should ignore invalid placements initially (§2.1)', function() {
+      const pose = R.pipe(
+        place(-1, 0, EAST),
+        report
+      )()
+      expect(pose).to.be.undefined
+    })
+    it('should ignore invalid placements subsequently', function() {
+      const pose = R.pipe(
+        place(2, 4, SOUTH),
+        place(-1, 0, EAST),
+        report
+      )()
+      expect(pose).to.have.properties(Pose(2, 4, SOUTH))
+    })
   })
   describe('move', function() {
-    it('should go NORTH', function() {
+    it('should go NORTH (§1.8)', function() {
       const init = Pose(2, 2, NORTH)
       const pose = move(init)
       expect(pose).to.eql(Pose(2, 3, NORTH))
@@ -53,7 +68,7 @@ describe('engine', function() {
       const pose = move(init)
       expect(pose).to.eql(Pose(1, 2, WEST))
     })
-    it('should prevent the bus leaving the carpark (§1.3)', function() {
+    it('should prevent the bus leaving the carpark (§§1.3, 2.1, 2.2)', function() {
       const pose = R.pipe(
         place(0, 4, NORTH),
         move, // illegal
@@ -73,7 +88,7 @@ describe('engine', function() {
     })
   })
   describe('right', function() {
-    it('should go NORTH -> EAST', function() {
+    it('should go NORTH -> EAST (§1.9)', function() {
       const north = Pose(0, 0, NORTH)
       const east = right(north)
       expect(east).to.have.properties({x:0, y:0, f:EAST})
@@ -139,7 +154,7 @@ describe('engine', function() {
       )()
       expect(pose).to.eql(Pose(1, 1, SOUTH))
     })
-    it('should discard all commands until a valid PLACE command (§1.4)', function() {
+    it('should discard all commands until a valid PLACE command (§§1.4, 1.11)', function() {
       const pose = R.pipe(
         place(1, 2, -1),
         move,
