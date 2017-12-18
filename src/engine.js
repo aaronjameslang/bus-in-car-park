@@ -2,26 +2,18 @@ const R = require('rambda')
 
 const Pose = require('./Pose')
 
-function getUnitVector(f) {
-  return {
-    0: {x: 0, y:+1}, // North
-    1: {x:+1, y: 0}, // East
-    2: {x: 0, y:-1}, // South
-    3: {x:-1, y: 0}, // West
-  }[f]
-}
-
 function move(pose) {
-  const unitVector = getUnitVector(pose.f)
-  const x = pose.x + unitVector.x
-  const y = pose.y + unitVector.y
-  const f = pose.f
-  return Pose(x, y, f)
+  return pose && Pose(
+    pose.x + ( 2 - pose.f ) % 2,
+    pose.y + ( 1 - pose.f ) % 2,
+    pose.f,
+    pose
+  )
 }
 
 const turn = R.curry(
   (Δt, pose) =>
-    Pose(
+    pose && Pose(
       pose.x,
       pose.y,
      (pose.f + Δt + 4) % 4,
