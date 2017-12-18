@@ -8,6 +8,30 @@ const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose')
 const Pose = require('../src/Pose')
 
 describe('engine', function() {
+  describe('place', function() {
+    it('should face NORTH at 0,0 (§1.5)', function() {
+      const pose = R.pipe(
+        place(0, 0, NORTH),
+        report
+      )()
+      expect(pose).to.have.properties(Pose(0, 0, NORTH))
+    })
+    it('should face WEST at 4,4 (§1.5)', function() {
+      const pose = R.pipe(
+        place(4, 4, WEST),
+        report
+      )()
+      expect(pose).to.have.properties(Pose(4, 4, WEST))
+    })
+    it('should be repeatable (§1.7)', function() {
+      const pose = R.pipe(
+        place(1, 0, EAST),
+        place(2, 4, SOUTH),
+        report
+      )()
+      expect(pose).to.have.properties(Pose(2, 4, SOUTH))
+    })
+  })
   describe('move', function() {
     it('should go NORTH', function() {
       const init = Pose(2, 2, NORTH)
@@ -29,7 +53,7 @@ describe('engine', function() {
       const pose = move(init)
       expect(pose).to.eql(Pose(1, 2, WEST))
     })
-    it('§1.3 Any movement that would result in the bus leaving the carpark must be prevented,', function() {
+    it('should prevent the bus leaving the carpark (§1.3)', function() {
       const pose = R.pipe(
         place(0, 4, NORTH),
         move, // illegal
@@ -37,7 +61,7 @@ describe('engine', function() {
       )()
       expect(pose).to.have.properties(Pose(0, 4, NORTH))
     })
-    it('§1.3 ... however further valid movement commands must still be allowed', function() {
+    it(' ... however further valid movement commands must still be allowed (§1.3)', function() {
       const pose = R.pipe(
         place(0, 4, NORTH),
         move, // illegal
@@ -99,6 +123,21 @@ describe('engine', function() {
         report
       )()
       expect(pose).to.have.properties({x:3, y:3, f:NORTH})
+    })
+  })
+  describe('engine', function() {
+    it('should be able to accept any of the 5 commands (§1.4)', function() {
+      const pose = R.pipe(
+        place(1, 2, EAST),
+        left,
+        left,
+        left,
+        right,
+        left,
+        move,
+        report
+      )()
+      expect(pose).to.eql(Pose(1, 1, SOUTH))
     })
   })
 })
