@@ -8,6 +8,28 @@ const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose')
 const Pose = require('../src/Pose')
 
 describe('engine', function() {
+  describe('move', function() {
+    it('should go NORTH', function() {
+      const init = Pose(2, 2, NORTH)
+      const pose = move(init)
+      expect(pose).to.eql(Pose(2, 3, NORTH))
+    })
+    it('should go EAST', function() {
+      const init = Pose(2, 2, EAST)
+      const pose = move(init)
+      expect(pose).to.eql(Pose(3, 2, EAST))
+    })
+    it('should go SOUTH', function() {
+      const init = Pose(2, 2, SOUTH)
+      const pose = move(init)
+      expect(pose).to.eql(Pose(2, 1, SOUTH))
+    })
+    it('should go WEST', function() {
+      const init = Pose(2, 2, WEST)
+      const pose = move(init)
+      expect(pose).to.eql(Pose(1, 2, WEST))
+    })
+  })
   describe('right', function() {
     it('should go NORTH -> EAST', function() {
       const north = Pose(0, 0, NORTH)
