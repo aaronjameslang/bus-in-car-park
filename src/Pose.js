@@ -13,16 +13,16 @@ module.exports = Pose
  *    Multiply by 3 and visualise a clock face
  * fallback: Pose|undefined, invalid poses silently fail
  */
-function Pose(x, y, f, fallback) {
+function Pose (x, y, f, fallback) {
   if (!isValid(x, y, f)) return fallback
   return Object.freeze({
     x: x,
     y: y,
-    f: f,
+    f: f
   })
 }
 
-function isValid(x, y, f) {
+function isValid (x, y, f) {
   return true &&
     isIntInRange(x, 0, 4) &&
     isIntInRange(y, 0, 4) &&
@@ -32,7 +32,7 @@ function isValid(x, y, f) {
 /**
  * Inclusive
  */
-function isIntInRange(i, min, max) {
+function isIntInRange (i, min, max) {
   return Number.isInteger(i) && i >= min && i <= max
 }
 
