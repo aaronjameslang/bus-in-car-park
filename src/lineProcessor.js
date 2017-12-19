@@ -3,7 +3,7 @@ module.exports = {
   processLines: processLines
 }
 
-const {append, reduce} = require('rambda')
+const {append, reduce} = require('ramda')
 
 const {place, move, left, right, report} = require('./engine')
 const {FACING} = require('./Pose')
