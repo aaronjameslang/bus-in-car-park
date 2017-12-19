@@ -9,6 +9,34 @@ const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose').FACING
 const Pose = require('../src/Pose')
 
 describe('engine', function () {
+  it('should be able to accept any of the 5 commands (§1.4)', function () {
+    const pose = pipe(
+      place(1, 2, EAST),
+      left,
+      left,
+      left,
+      right,
+      left,
+      move,
+      report
+    )(undefined)
+    expect(pose).to.eql(Pose(1, 1, SOUTH))
+  })
+  it('should discard all commands until a valid PLACE command (§§1.4, 1.11)', function () {
+    const pose = pipe(
+      place(1, 2, -1),
+      move,
+      left,
+      right,
+      report,
+      place(1, 2, EAST),
+      move,
+      left,
+      right,
+      report
+    )()
+    expect(pose).to.eql(Pose(2, 2, EAST))
+  })
   describe('place', function () {
     it('should face NORTH at 0,0 (§1.5)', function () {
       const pose = pipe(
@@ -139,36 +167,6 @@ describe('engine', function () {
         report
       )(undefined)
       expect(pose).to.eql({x: 3, y: 3, f: NORTH})
-    })
-  })
-  describe('engine', function () {
-    it('should be able to accept any of the 5 commands (§1.4)', function () {
-      const pose = pipe(
-        place(1, 2, EAST),
-        left,
-        left,
-        left,
-        right,
-        left,
-        move,
-        report
-      )(undefined)
-      expect(pose).to.eql(Pose(1, 1, SOUTH))
-    })
-    it('should discard all commands until a valid PLACE command (§§1.4, 1.11)', function () {
-      const pose = pipe(
-        place(1, 2, -1),
-        move,
-        left,
-        right,
-        report,
-        place(1, 2, EAST),
-        move,
-        left,
-        right,
-        report
-      )()
-      expect(pose).to.eql(Pose(2, 2, EAST))
     })
   })
 })
