@@ -1,2 +1,12 @@
 #! /usr/bin/env node
-console.log('Hello, world!')
+
+const fs = require('fs')
+
+const {processLines} = require('../src/lineProcessor')
+
+const filename = process.argv[2]
+
+const text = fs.readFileSync(filename, 'utf8')
+const linesIn = text.split(/\r?\n/)
+const [_, linesOut] = processLines(linesIn)
+linesOut.forEach(line => console.log(line))
