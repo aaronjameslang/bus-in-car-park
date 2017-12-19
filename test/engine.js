@@ -2,7 +2,6 @@
 
 const chai = require('chai')
 const expect = chai.expect
-chai.use(require('chai-properties'))
 const {pipe} = require('ramda')
 
 const {place, move, left, right, report} = require('../src/engine')
@@ -16,14 +15,14 @@ describe('engine', function () {
         place(0, 0, NORTH),
         report
       )(undefined)
-      expect(pose).to.have.properties(Pose(0, 0, NORTH))
+      expect(pose).to.eql(Pose(0, 0, NORTH))
     })
     it('should face WEST at 4,4 (§1.5)', function () {
       const pose = pipe(
         place(4, 4, WEST),
         report
       )(undefined)
-      expect(pose).to.have.properties(Pose(4, 4, WEST))
+      expect(pose).to.eql(Pose(4, 4, WEST))
     })
     it('should be repeatable (§1.7)', function () {
       const pose = pipe(
@@ -31,7 +30,7 @@ describe('engine', function () {
         place(2, 4, SOUTH),
         report
       )()
-      expect(pose).to.have.properties(Pose(2, 4, SOUTH))
+      expect(pose).to.eql(Pose(2, 4, SOUTH))
     })
     it('should ignore invalid placements initially (§2.1)', function () {
       const pose = pipe(
@@ -46,7 +45,7 @@ describe('engine', function () {
         place(-1, 0, EAST),
         report
       )(undefined)
-      expect(pose).to.have.properties(Pose(2, 4, SOUTH))
+      expect(pose).to.eql(Pose(2, 4, SOUTH))
     })
   })
   describe('move', function () {
@@ -76,7 +75,7 @@ describe('engine', function () {
         move, // illegal
         report
       )(undefined)
-      expect(pose).to.have.properties(Pose(0, 4, NORTH))
+      expect(pose).to.eql(Pose(0, 4, NORTH))
     })
     it(' ... however further valid movement commands must still be allowed (§1.3)', function () {
       const pose = pipe(
@@ -86,31 +85,31 @@ describe('engine', function () {
         move,
         report
       )(undefined)
-      expect(pose).to.have.properties(Pose(1, 4, EAST))
+      expect(pose).to.eql(Pose(1, 4, EAST))
     })
   })
   describe('right', function () {
     it('should go NORTH -> EAST (§1.9)', function () {
       const north = Pose(0, 0, NORTH)
       const east = right(north)
-      expect(east).to.have.properties({x: 0, y: 0, f: EAST})
+      expect(east).to.eql({x: 0, y: 0, f: EAST})
     })
     it('should go WEST -> NORTH', function () {
       const west = Pose(0, 0, WEST)
       const north = right(west)
-      expect(north).to.have.properties({x: 0, y: 0, f: NORTH})
+      expect(north).to.eql({x: 0, y: 0, f: NORTH})
     })
   })
   describe('left', function () {
     it('should go NORTH -> WEST', function () {
       const north = Pose(0, 0, NORTH)
       const west = left(north)
-      expect(west).to.have.properties({x: 0, y: 0, f: WEST})
+      expect(west).to.eql({x: 0, y: 0, f: WEST})
     })
     it('should go EAST -> NORTH', function () {
       const east = Pose(0, 0, EAST)
       const north = left(east)
-      expect(north).to.have.properties({x: 0, y: 0, f: NORTH})
+      expect(north).to.eql({x: 0, y: 0, f: NORTH})
     })
   })
   describe('Specification §3', function () {
@@ -120,7 +119,7 @@ describe('engine', function () {
         move,
         report
       )(undefined)
-      expect(pose).to.have.properties({x: 0, y: 1, f: NORTH})
+      expect(pose).to.eql({x: 0, y: 1, f: NORTH})
     })
     it('§3b', function () {
       const pose = pipe(
@@ -128,7 +127,7 @@ describe('engine', function () {
         left,
         report
       )(undefined)
-      expect(pose).to.have.properties({x: 0, y: 0, f: WEST})
+      expect(pose).to.eql({x: 0, y: 0, f: WEST})
     })
     it('§3c', function () {
       const pose = pipe(
@@ -139,7 +138,7 @@ describe('engine', function () {
         move,
         report
       )(undefined)
-      expect(pose).to.have.properties({x: 3, y: 3, f: NORTH})
+      expect(pose).to.eql({x: 3, y: 3, f: NORTH})
     })
   })
   describe('engine', function () {
