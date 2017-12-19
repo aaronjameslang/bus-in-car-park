@@ -7,6 +7,7 @@
   },
   "scripts": {
     "ci": "npm test && npm run lint",
+    "docs": "cd docs && make",
     "fix": "standard --fix",
     "lint": "standard",
     "test": "mocha"
