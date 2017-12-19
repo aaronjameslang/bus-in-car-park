@@ -6,6 +6,8 @@ Original specification available [here](//aaronjameslang.github.io/bus-in-car-pa
 
 Amended  specification available [here](//aaronjameslang.github.io/bus-in-car-park/specification.html)
 
+Run the tests in your browser [here](//aaronjameslang.github.io/bus-in-car-park/tests.html)
+
 ## Usage
 
 From file:
