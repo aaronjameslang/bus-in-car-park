@@ -2,11 +2,12 @@
 
 const fs = require('fs')
 
-const {processLines} = require('../src/lineProcessor')
+const {processLine, processLines} = require('../src/lineProcessor')
 
 const filename = process.argv[2]
+if (filename) {
+  require('../src/fileProcessor').processFile(filename, console)
+} else {
+  require('../src/repl').run(process, console)
+}
 
-const text = fs.readFileSync(filename, 'utf8')
-const linesIn = text.split(/\r?\n/)
-const [_, linesOut] = processLines(linesIn)
-linesOut.forEach(line => console.log(line))
