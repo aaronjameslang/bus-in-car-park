@@ -8,6 +8,8 @@ Amended  specification available [here](//aaronjameslang.github.io/bus-in-car-pa
 
 Run the tests in your browser [here](//aaronjameslang.github.io/bus-in-car-park/tests.html)
 
+JSDoc [here](//aaronjameslang.github.io/bus-in-car-park/jsdoc)
+
 ## Usage
 
 From file:
