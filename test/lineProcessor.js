@@ -7,52 +7,42 @@ const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose').FACING
 const Pose = require('../src/Pose')
 const {processLine, processLines} = require('../src/lineProcessor')
 
-function testProcessLines (linesIn, expectedPose, expectedLinesOut) {
-  const [actualPose, actualLinesOut] = processLines(linesIn)
-  expect(actualPose).to.eql(expectedPose)
-  expect(actualLinesOut).to.eql(expectedLinesOut)
-}
-
 describe('CLI', function () {
   it('should be able to accept any of the 5 commands (§1.4)', function () {
-    testProcessLines(
-      [
-        'PLACE 1,2,EAST',
-        'LEFT',
-        'LEFT',
-        'LEFT',
-        'RIGHT',
-        'LEFT',
-        'MOVE',
-        'REPORT'
-      ],
-      Pose(1, 1, SOUTH),
-      ['Output: 1,1,SOUTH']
-    )
+    const [pose, linesOut] = processLines([
+      'PLACE 1,2,EAST',
+      'LEFT',
+      'LEFT',
+      'LEFT',
+      'RIGHT',
+      'LEFT',
+      'MOVE',
+      'REPORT'
+    ])
+    expect(pose).to.have.properties(Pose(1, 1, SOUTH))
+    expect(linesOut).to.eql(['Output: 1,1,SOUTH'])
   })
   it('should discard all commands until a valid PLACE command (§§1.4, 1.11)', function () {
-    testProcessLines(
-      [
-        'PLACE 1,7,UP',
-        'LEFT',
-        'LIFT',
-        'LEFT',
-        'RIGHT',
-        'LEFT',
-        'MOVE',
-        'REPORT',
-        'PLACE 1,2,EAST',
-        'LEFT',
-        'LEFT',
-        'LEFT',
-        'RIGHT',
-        'LEFT',
-        'MOVE',
-        'REPORT'
-      ],
-      Pose(1, 1, SOUTH),
-      ['Output: 1,1,SOUTH']
-    )
+    const [pose, linesOut] = processLines([
+      'PLACE 1,7,UP',
+      'LEFT',
+      'LIFT',
+      'LEFT',
+      'RIGHT',
+      'LEFT',
+      'MOVE',
+      'REPORT',
+      'PLACE 1,2,EAST',
+      'LEFT',
+      'LEFT',
+      'LEFT',
+      'RIGHT',
+      'LEFT',
+      'MOVE',
+      'REPORT'
+    ])
+    expect(pose).to.have.properties(Pose(1, 1, SOUTH))
+    expect(linesOut).to.eql(['Output: 1,1,SOUTH'])
   })
   describe('PLACE', function () {
     it('should face NORTH at 0,0 (§1.5)', function () {
