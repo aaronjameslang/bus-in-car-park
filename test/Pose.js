@@ -24,4 +24,24 @@ describe('Pose', function() {
     const pose = Pose(0, 0, 0)
     expect(pose).to.have.properties({x:0, y:0, f:0})
   })
+
+  describe('FACING', function() {
+    it('should map NORTH -> 0', function() {
+      const id = Pose.FACING['NORTH']
+      expect(id).to.equal(0)
+    })
+    it('should map WEST -> 3', function() {
+      const id = Pose.FACING['WEST']
+      expect(id).to.equal(3)
+    })
+    it('should map 0 -> NORTH', function() {
+      const name = Pose.FACING[0]
+      expect(name).to.equal('NORTH')
+    })
+    it('should map 3 -> WEST', function() {
+      const name = Pose.FACING[3]
+      expect(name).to.equal('WEST')
+    })
+  })
 })
+

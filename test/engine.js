@@ -4,7 +4,7 @@ chai.use(require('chai-properties'))
 const R = require('rambda')
 
 const {place, move, left, right, report} = require('../src/engine')
-const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose')
+const {NORTH, EAST, SOUTH, WEST} = require('../src/Pose').FACING
 const Pose = require('../src/Pose')
 
 describe('engine', function() {

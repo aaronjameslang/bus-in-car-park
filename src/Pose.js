@@ -22,11 +22,6 @@ function Pose(x, y, f, fallback) {
   })
 }
 
-Pose.NORTH = 0
-Pose.EAST  = 1
-Pose.SOUTH = 2
-Pose.WEST  = 3
-
 function isValid(x, y, f) {
   return true &&
     isIntInRange(x, 0, 4) &&
@@ -41,3 +36,11 @@ function isIntInRange(i, min, max) {
   return Number.isInteger(i) && i >= min && i <= max
 }
 
+const FACING = [
+  'NORTH',
+  'EAST',
+  'SOUTH',
+  'WEST'
+]
+FACING.forEach((name, id) => { FACING[name] = id })
+Pose.FACING = Object.freeze(FACING)
