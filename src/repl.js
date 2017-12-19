@@ -4,7 +4,7 @@ const {processLine} = require('../src/lineProcessor')
 
 module.exports.run = run
 
-function run(process, console) {
+function run (process, console) {
   let currentPose = null
   const rl = readline.createInterface({
     input: process.stdin,
@@ -18,7 +18,7 @@ function run(process, console) {
     } else if (!pose) {
       console.log(':')
     } else {
-      const arrow = String.fromCodePoint(0xD83E, 0xDC1C + ((pose.f + 1)%4))
+      const arrow = String.fromCodePoint(0xD83E, 0xDC1C + ((pose.f + 1) % 4))
       const str = ': ' + pose.x + ',' + pose.y + ' ' + arrow
       console.log(str)
     }

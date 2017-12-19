@@ -4,10 +4,9 @@ const {processLines} = require('./lineProcessor')
 
 module.exports.processFile = processFile
 
-function processFile(filename, console) {
+function processFile (filename, console) {
   const text = fs.readFileSync(filename, 'utf8')
   const linesIn = text.split(/\r?\n/)
-  const [_, linesOut] = processLines(linesIn)
+  const linesOut = processLines(linesIn)[1]
   linesOut.forEach(line => console.log(line))
 }
-

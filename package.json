@@ -6,6 +6,9 @@
     "bicp": "bin/bicp"
   },
   "scripts": {
+    "ci": "npm test && npm run lint",
+    "fix": "standard --fix",
+    "lint": "standard",
     "test": "mocha"
   },
   "dependencies": {
@@ -13,6 +16,7 @@
     "chai-properties": "^1.3.0",
     "mocha": "^4.0.1",
     "rambda": "^1.0.6",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "standard": "^10.0.3"
   }
 }

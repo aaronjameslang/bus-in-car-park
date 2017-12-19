@@ -3,12 +3,12 @@ module.exports = {
   processLines: processLines
 }
 
-const {append, pipe, reduce} = require('rambda')
+const {append, reduce} = require('rambda')
 
 const {place, move, left, right, report} = require('./engine')
 const {FACING} = require('./Pose')
 
-function processLines(linesIn) {
+function processLines (linesIn) {
   const reductor = ([poseIn, linesOut], lineIn) => {
     const [poseOut, lineOut] = processLine(poseIn, lineIn)
     return [poseOut, lineOut ? append(lineOut, linesOut) : linesOut]
@@ -17,7 +17,7 @@ function processLines(linesIn) {
   return reduce(reductor, [null, []], linesIn)
 }
 
-function processLine(pose, line) {
+function processLine (pose, line) {
   const parts = line.split(/[^\w\d]/)
   switch (parts[0]) {
     case 'PLACE':
@@ -38,6 +38,6 @@ function processLine(pose, line) {
   }
 }
 
-function format(pose) {
+function format (pose) {
   return 'Output: ' + pose.x + ',' + pose.y + ',' + FACING[pose.f]
 }
