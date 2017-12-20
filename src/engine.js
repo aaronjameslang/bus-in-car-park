@@ -11,11 +11,11 @@ function move (pose) {
   )
 }
 
-function turn (Δt, pose) {
+function turn (Δf, pose) {
   return pose && Pose(
     pose.x,
     pose.y,
-   (pose.f + Δt + 4) % 4,
+   (pose.f + Δf + 4) % 4,
     pose
   )
 }
