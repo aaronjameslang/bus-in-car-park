@@ -2,13 +2,11 @@
 
 "Bus in Car Park" is a simulation of, you guessed it, a bus in a car park
 
-Demo [here](//aaronjameslang.github.io/bus-in-car-park/demo.html)
-
-Original specification available [here](//aaronjameslang.github.io/bus-in-car-park/specification.pdf)
-
-Amended  specification available [here](//aaronjameslang.github.io/bus-in-car-park/specification.html)
-
-Run the tests in your browser [here](//aaronjameslang.github.io/bus-in-car-park/tests.html)
+  - [JSDoc](//aaronjameslang.github.io/bus-in-car-park)
+  - [Demo](//aaronjameslang.github.io/bus-in-car-park/extras/demo.html)
+  - [Original Specification](//aaronjameslang.github.io/bus-in-car-park/extras/specification.pdf)
+  - [Amended  Specification](//aaronjameslang.github.io/bus-in-car-park/extras/specification.html)
+  - [Test in your browser](//aaronjameslang.github.io/bus-in-car-park/extras/tests.html)
 
 ## Usage
 

@@ -6,12 +6,13 @@
   "repository": "https://github.com/aaronjameslang/bus-in-car-park",
   "license": "MIT",
   "bin": {
-    "bicp": "bin/bicp"
+    "bicp": "bin/bicp.js"
   },
   "scripts": {
     "ci": "npm test && npm run lint",
-    "docs": "webpack && cd docs && make",
+    "docs": "webpack && npm run jsdoc && cd docs/extras && make",
     "fix": "standard --fix",
+    "jsdoc": "jsdoc src README.md --recurse --destination ./docs/ --configure jsdoc.json",
     "lint": "standard",
     "test": "mocha"
   },
@@ -24,10 +25,16 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "chai-properties": "^1.3.0",
+    "jsdoc": "^3.5.5",
     "mocha": "^4.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "standard": "^10.0.3",
     "webpack": "^3.10.0"
+  },
+  "standard": {
+    "ignore": [
+      "docs"
+    ]
   }
 }

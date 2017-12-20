@@ -71,3 +71,8 @@ Here is some example input and output:
         MOVE
         REPORT
         Output: 3,3,NORTH
+
+## 4 Errata
+
+  - 4.1 The bus has zero size
+  - 4.2 The position of the bus is discrete, specifying any of 25 1x1 spaces

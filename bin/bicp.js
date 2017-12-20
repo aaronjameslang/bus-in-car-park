@@ -1,13 +1,8 @@
 #! /usr/bin/env node
 
-const fs = require('fs')
-
-const {processLine, processLines} = require('../src/lineProcessor')
-
 const filename = process.argv[2]
 if (filename) {
   require('../src/fileProcessor').processFile(filename, console)
 } else {
   require('../src/repl').run(process, console)
 }
-

@@ -1,9 +1,17 @@
+/** @module */
 const readline = require('readline')
 
 const {processLine} = require('../src/lineProcessor')
 
 module.exports.run = run
 
+/**
+ * Run the REPL, accepting input, processing, and printing output
+ *
+ * @param {external:process} The process to be used for IO & exit
+ * @param {external:console} The console for output to be logged to
+ * @returns {undefined}
+ */
 function run (process, console) {
   let currentPose = null
   const rl = readline.createInterface({
