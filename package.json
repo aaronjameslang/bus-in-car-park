@@ -1,6 +1,9 @@
 {
   "name": "bus-in-car-park",
   "version": "0.0.0",
+  "description": "Unsurprisingly, a simulation of a bus in a car park",
+  "author": "aaronjameslang@googlemail.com",
+  "repository": "https://github.com/aaronjameslang/bus-in-car-park",
   "license": "MIT",
   "bin": {
     "bicp": "bin/bicp"
@@ -14,11 +17,18 @@
     "test": "mocha"
   },
   "dependencies": {
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "chai-properties": "^1.3.0",
     "jsdoc": "^3.5.5",
     "mocha": "^4.0.1",
-    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "standard": "^10.0.3",
     "webpack": "^3.10.0"
   },

@@ -1,5 +1,6 @@
 module.exports = {
   entry: {
+    'demo.js': './src/demo.jsx',
     'mocha.js': './node_modules/mocha/mocha.js',
     'tests.js': [
       './test/Pose.js', // TODO this should be a pattern match
@@ -9,5 +10,13 @@ module.exports = {
   },
   output: {
     filename: './docs/extras/[name]'
+  },
+  module: {
+    loaders: [
+      {
+        loader: 'babel-loader',
+        test: /\.jsx?/
+      }
+    ]
   }
 }
