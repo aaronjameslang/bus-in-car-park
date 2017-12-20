@@ -1102,6 +1102,9 @@ module.exports = function transferFlags(assertion, object, includeAll) {
 /* 21 */
 /***/ (function(module, exports) {
 
+/**
+ * @module
+ */
 module.exports = Pose
 
 /**
@@ -1110,12 +1113,13 @@ module.exports = Pose
  * There's a snappy backronym here somewhere
  * Position and Orientation of Specific Entity? idk
  *
- * x, y: Int, position between 0-4 inclusive
- *       0,0 is south-west
- * f: Int, facing
- *    0: North, 1: East, 2: South, 3: West
- *    Multiply by 3 and visualise a clock face
- * fallback: Pose|undefined, invalid poses silently fail
+ * @constructor
+ * @param {int} x - Horizontal position, between 0-4 inclusive, 0 is south
+ * @param {int} y - Vertical   position, between 0-4 inclusive, 0 is west
+ * @param {int} f - Facing/orientation , between 0-3 inclusive
+ * @param {?module:Pose.Pose} [fallback] - State if others params are invalid
+ * @see module:Pose.FACING
+ * @static
  */
 function Pose (x, y, f, fallback) {
   if (!isValid(x, y, f)) return fallback
@@ -1133,13 +1137,16 @@ function isValid (x, y, f) {
     isIntInRange(f, 0, 3)
 }
 
-/**
- * Inclusive
- */
 function isIntInRange (i, min, max) {
   return Number.isInteger(i) && i >= min && i <= max
 }
 
+/**
+ * A map of facings, names <-> id
+ * 0: North, 1: East, 2: South, 3: West
+ * Multiply by 3 and visualise a clock face
+ * @static
+ */
 const FACING = [
   'NORTH',
   'EAST',
@@ -7236,10 +7243,13 @@ var where = /*#__PURE__*/Object(__WEBPACK_IMPORTED_MODULE_0__internal_curry2__["
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/** @module */
+
 const R = __webpack_require__(55)
 
 const Pose = __webpack_require__(21)
 
+/** @see module:engine.move */
 function move (pose) {
   return pose && Pose(
     pose.x + (2 - pose.f) % 2,
@@ -7249,20 +7259,75 @@ function move (pose) {
   )
 }
 
-function turn (Δt, pose) {
+/**
+ * Calculate a turn
+ *
+ * If the initial pose is unset, the result will be also
+ *
+ * @param {int} Δf - The change in f, how much to turn
+ * @param {module:Pose.Pose} pose - The pose before turning
+ * @returns {module:Pose.Pose} The pose after turning
+ */
+function turn (Δf, pose) {
   return pose && Pose(
     pose.x,
     pose.y,
-   (pose.f + Δt + 4) % 4,
+   (pose.f + Δf + 4) % 4,
     pose
   )
 }
 
 module.exports = {
+  /**
+   * Calculate the pose after a place
+   *
+   * This function is curried
+   *
+   * @function
+   * @param {int} x - Horizontal position, between 0-4 inclusive, 0 is south
+   * @param {int} y - Vertical   position, between 0-4 inclusive, 0 is west
+   * @param {int} f - Facing/orientation , between 0-3 inclusive
+   * @param {module:Pose.Pose} pose - The pose before placing
+   * @returns {module:Pose.Pose} The pose after
+   */
   place: R.curry(Pose),
+  /**
+   * Calculate the pose after a move
+   *
+   * @function
+   * @param {module:Pose.Pose} pose - The pose before moving
+   * @returns {module:Pose.Pose} The pose after
+   */
   move: move,
+  /**
+   * Calculate the pose after a left turn
+   *
+   * @see module:engine~turn
+   * @see module:engine.right
+   *
+   * @function
+   * @param {module:Pose.Pose} pose - The pose before turning
+   * @returns {module:Pose.Pose} The pose after turning
+   */
   left: R.partial(turn, [-1]),
+  /**
+   * Calculate the pose after a right turn
+   *
+   * @see module:engine~turn
+   * @see module:engine.left
+   *
+   * @function
+   * @param {module:Pose.Pose} pose - The pose before turning
+   * @returns {module:Pose.Pose} The pose after turning
+   */
   right: R.partial(turn, [+1]),
+  /**
+   * Calculate the pose after a report, this is a no-op
+   *
+   * @function
+   * @param {module:Pose.Pose} pose - The pose before
+   * @returns {module:Pose.Pose} The pose after
+   */
   report: R.identity
 }
 

@@ -7,9 +7,9 @@
   },
   "scripts": {
     "ci": "npm test && npm run lint",
-    "docs": "webpack && npm run jsdoc && cd docs && make",
+    "docs": "webpack && npm run jsdoc && cd docs/extras && make",
     "fix": "standard --fix",
-    "jsdoc": "jsdoc src --recurse --destination ./docs/jsdoc",
+    "jsdoc": "jsdoc src README.md --recurse --destination ./docs/",
     "lint": "standard",
     "test": "mocha"
   },
