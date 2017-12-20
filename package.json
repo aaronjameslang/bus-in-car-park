@@ -9,7 +9,7 @@
     "ci": "npm test && npm run lint",
     "docs": "webpack && npm run jsdoc && cd docs/extras && make",
     "fix": "standard --fix",
-    "jsdoc": "jsdoc src README.md --recurse --destination ./docs/",
+    "jsdoc": "jsdoc src README.md --recurse --destination ./docs/ --configure jsdoc.json",
     "lint": "standard",
     "test": "mocha"
   },
