@@ -6,7 +6,7 @@
   "repository": "https://github.com/aaronjameslang/bus-in-car-park",
   "license": "MIT",
   "bin": {
-    "bicp": "bin/bicp"
+    "bicp": "bin/bicp.js"
   },
   "scripts": {
     "ci": "npm test && npm run lint",
