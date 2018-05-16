@@ -21,7 +21,7 @@
     "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
